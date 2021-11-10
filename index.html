@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Website Building</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        #login-container {
+            width: 460px;
+            margin: 0 auto;
+        }
+
+        form label,
+        form input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        form input {
+            padding: 8px;
+            padding-right: 30px;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form div {
+            margin: 16px 0px;
+        }
+
+        .form-grp .far {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: none;
+        }
+
+        .form-gpr .far {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: none;
+        }
+
+        .fa-times-circle {
+            color: red;
+        }
+
+        .fa-check-circle {
+            color: green;
+        }
+
+        .field-container {
+            position: relative;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="login-container">
+
+        <form onsubmit="login(); return false;">
+            <div class="form-grp">
+                <label for="username">Username:</label>
+                <div class="field-container">
+                    <input id="username" type="text">
+                    <i class="far fa-check-circle u_check"></i>
+                    <i class="far fa-times-circle u_times"></i>
+                </div>
+            </div>
+
+            <div class="form-gpr">
+                <label for="password">Password:</label>
+                <div class="field-container">
+                    <input id="password" type="password">
+                    <i class="far fa-check-circle p_check"></i>
+                    <i class="far fa-times-circle p_times"></i>
+                </div>
+            </div>
+            <input type="submit" value="Login" id="button">
+        </form>
+        <br>
+        <span id="message"></span>
+    </div>
+
+
+
+    <script>
+        function checkUsernameField(username) {
+            return username === 'new_user' ? true : false;
+        }
+
+        function checkPasswordField(password) {
+            return password === '123456789' ? true : false;
+        }
+
+        function login() {
+            const usernameField = document.getElementById("username");
+            const passwordField = document.getElementById("password");
+
+            const usernameTimesIcon = document.querySelector(".u_times")
+            const usernameCheckIcon = document.querySelector(".u_check");
+            const passwordeTimesIcon = document.querySelector(".p_times")
+            const passwordCheckIcon = document.querySelector(".p_check");
+
+            let messageField = document.getElementById("message");
+            messageField.innerHTML = "";
+
+            let isValidUsername = checkUsernameField(usernameField.value);
+            let isValidPassword = checkPasswordField(passwordField.value);
+
+            if (isValidUsername) {
+                usernameField.style.border = "2px solid green";
+                usernameTimesIcon.style.display = "none";
+                usernameCheckIcon.style.display = "block";
+            } else {
+                usernameField.style.border = "2px solid red";
+                usernameTimesIcon.style.display = "block";
+                usernameCheckIcon.style.display = "none";
+                messageField.innerHTML = usernameField.value ? "<span>*please, enter valid username<span><br>" :
+                    "<span>*please, enter username</span><br>";
+            }
+
+            if (isValidPassword) {
+                passwordField.style.border = "2px solid green";
+                passwordeTimesIcon.style.display = "none";
+                passwordCheckIcon.style.display = "block";
+            } else {
+                passwordField.style.border = "2px solid red";
+                passwordeTimesIcon.style.display = "block";
+                passwordCheckIcon.style.display = "none";
+                messageField.innerHTML += passwordField.value ? "<span>*please, enter valid password</span>" :
+                    "<span>*please, enter password</span>";
+            }
+
+            if (isValidUsername && isValidPassword) {
+                let messageField = document.getElementById("message");
+                messageField.innerHTML = "Successful login!"
+            }
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
